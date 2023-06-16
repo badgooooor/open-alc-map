@@ -4,6 +4,7 @@
 <script lang="ts">
 	import panzoom, { type PanZoom } from 'panzoom';
 	import { onDestroy, onMount } from 'svelte';
+	import { selectedProvince } from '../stores';
 
 	let svg: SVGElement;
 	let panzoomInstance: PanZoom;
@@ -14,12 +15,10 @@
 				e.preventDefault();
 
 				// Handle only path elements
-
 				const el = e.target as SVGElement;
-
 				if (el.tagName !== 'path') return;
 
-				alert(`You clicked: ${el.getAttribute('name')}`);
+				selectedProvince.set(el.getAttribute('name'));
 			}
 		});
 	});
@@ -27,6 +26,7 @@
 	onDestroy(() => {
 		panzoomInstance?.dispose();
 	});
+
 </script>
 
 <div class="container mx-auto h-full overflow-hidden border">
