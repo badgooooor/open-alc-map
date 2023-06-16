@@ -16,9 +16,11 @@
 
 				// Handle only path elements
 				const el = e.target as SVGElement;
-				if (el.tagName !== 'path') return;
-
-				selectedProvince.set(el.getAttribute('name'));
+				if (el.tagName !== 'path') {
+					selectedProvince.set(null)
+				} else {
+					selectedProvince.set(el.getAttribute('name'));
+				}
 			}
 		});
 	});
